@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+        let words = ['apple', 'book', 'europe'];
+        let Game = {
+            numberOfletter: null,
+            word: null,
+            arrayLetters: [],
+            tries: 0,
+        } 
+        let randomWords = () => Math.floor(Math.random() * words.length);
+
+        let createArrayLetter = word =>{
+            for(let i = 0; i < word.length; i++){
+                Game.arrayLetters.push('_ ')
+            }
+        }
+        const printMessage = hash => {
+            alert(`Количество букв в слове: ${hash.numberOfletter} \n` + `Загаданное слово ${hash.arrayLetters.join('')}`);
+        }
+        let checkLetter = symbol =>{
+            for(let i = 0; i < Game.word.length; i++){
+                if(symbol == Game.word[i]){
+                    Game.arrayLetters[i] = symbol;
+                }
+            }
+        }
+        Game.word = words[randomWords()];
+        createArrayLetter(Game.word);
+        Game.numberOfletter = Game.word.length;
+        while(true){
+            printMessage(Game);
+            let userWord = prompt('Введите букву');
+            if(userWord == null){
+                break;
+            }
+            if(userWord.length !==1){
+                alert('Введите только одно значение');
+                continue;
+            }
+            Game.tries++;
+            checkLetter(userWord);
+            checkLetter(userWord.toLocaleLowerCase());
+            if(Game.word == Game.arrayLetters.join('')){
+                alert(`Капитал шоу Поле Чудес \n Подарки в студию`);
+                break;
+            }
+        }
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
